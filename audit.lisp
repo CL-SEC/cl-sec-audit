@@ -11,21 +11,10 @@
                    (user-homedir-pathname))
   "Local cache directory for downloaded advisory YAML files.")
 
-(defvar *advisory-directory*
-  (or
-   ;; 1. Look for cl-sec-advisories as a sibling checkout
-   (let ((sibling (merge-pathnames "../cl-sec-advisories/advisories/"
-                                   (asdf:system-source-directory "cl-sec-audit"))))
-     (when (probe-file sibling) sibling))
-   ;; 2. Use cached download
-   (when (probe-file *advisory-cache-directory*)
-     *advisory-cache-directory*)
-   ;; 3. Fall back to advisories/ in the same directory (embedded use)
-   (merge-pathnames "advisories/"
-                    (asdf:system-source-directory "cl-sec-audit")))
+(defvar *advisory-directory* nil
   "Directory containing CL-SEC advisory YAML files.
-Resolved in order: sibling git checkout, local cache, embedded.
-Call (update-advisory-database) to download/refresh the cache.")
+NIL means auto-download from *advisory-url* on first use.
+Set to a pathname to use a local checkout instead.")
 
 (defvar *severity-threshold* nil
   "When set to a string (e.g. \"high\"), only report findings at or above
