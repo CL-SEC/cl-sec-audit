@@ -10,7 +10,7 @@ Scan installed Common Lisp systems for known
 ```
 
 The advisory database is downloaded automatically on first use from
-GitHub Pages and cached in `~/.local/share/cl-sec/advisories/`.
+GitHub Pages and cached in `~/.cache/cl-sec-audit/`.
 
 ## Usage
 
@@ -38,7 +38,7 @@ GitHub Pages and cached in `~/.local/share/cl-sec/advisories/`.
 
 1. Downloads the advisory database from
    `https://cl-sec.github.io/cl-sec-advisories/advisories.tar.gz`
-   (cached locally in `~/.local/share/cl-sec/advisories/`)
+   (cached locally in `~/.cache/cl-sec-audit/`)
 2. Enumerates installed systems via ocicl.csv, Quicklisp, or ASDF
 3. Extracts version information (ocicl tags, QL dist dates, git hashes)
 4. Matches against CL-SEC advisory `affected-dists` entries

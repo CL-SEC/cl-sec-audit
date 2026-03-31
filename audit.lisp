@@ -7,7 +7,7 @@
   "URL to download the CL-SEC advisory database tarball.")
 
 (defvar *advisory-cache-directory*
-  (merge-pathnames ".local/share/cl-sec/advisories/"
+  (merge-pathnames ".cache/cl-sec-audit/"
                    (user-homedir-pathname))
   "Local cache directory for downloaded advisory YAML files.")
 
