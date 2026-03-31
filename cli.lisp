@@ -44,12 +44,11 @@
       (let ((args (uiop:command-line-arguments)))
         (multiple-value-bind (project-dir advisories-dir severity)
             (parse-args args)
-          (let ((findings (audit
+          (let ((findings (apply #'audit
                            :project-directory (or project-dir (uiop:getcwd))
-                           :directory (if advisories-dir
-                                         (uiop:ensure-directory-pathname advisories-dir)
-                                         *advisory-directory*)
-                           :severity severity)))
+                           :severity severity
+                           (when advisories-dir
+                             (list :directory (uiop:ensure-directory-pathname advisories-dir))))))
             (uiop:quit (if (and findings (> (length findings) 0)) 1 0)))))
     (error (e)
       (format *error-output* "Error: ~A~%" e)
